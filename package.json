@@ -2,7 +2,7 @@
   "name": "jetvibe",
   "displayName": "JetVibe",
   "description": "Sets up VSCode in the PhpStorm style and includes ready-to-use extras.",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "publisher": "igorhaf",
   "engines": { "vscode": "^1.84.0" },
   "categories": ["Themes", "Keymaps", "Extension Packs"],
@@ -25,15 +25,19 @@
       }
     ],
     "configurationDefaults": {
+      "editor.fontFamily": "'JetBrains Mono', Consolas, monospace",
+      "editor.fontWeight": "400",
+      "editor.fontLigatures": true,
+
+      "editor.fontSize": 13,
+      "editor.lineHeight": 20,
+      "editor.letterSpacing": -0.1,
+      "window.zoomLevel": -0.5,
       "terminal.integrated.fontFamily": "JetBrainsMono Nerd Font Mono",
       "terminal.integrated.fontSize": 13,
-      "editor.fontFamily": "Jetbrains Mono, Monaco, 'Courier New', monospace",
-      "editor.fontSize": 12,
-      "editor.lineHeight": 20,
-      "editor.fontWeight": "400",
-      "editor.letterSpacing": 0.2,
+      "terminal.integrated.lineHeight": 1.1,
+      "terminal.integrated.letterSpacing": 0,
 
-      "window.zoomLevel": -0.5,           
       "workbench.tree.indent": 12,
       "workbench.list.smoothScrolling": true,
       "workbench.editor.tabSizing": "shrink",
@@ -41,7 +45,6 @@
       "breadcrumbs.enabled": true,
       "editor.bracketPairColorization.enabled": false,
 
-      "editor.fontLigatures": true,
       "editor.lineNumbers": "on",
       "workbench.statusBar.visible": true,
       "workbench.iconTheme": "material-icon-theme",
