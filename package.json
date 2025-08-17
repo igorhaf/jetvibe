@@ -1,0 +1,38 @@
+{
+  "name": "jetvibe",
+  "displayName": "JetVibe",
+  "description": "Sets up VSCode in the PhpStorm style and includes ready-to-use extras.",
+  "version": "0.0.1",
+  "publisher": "igorhaf",
+  "engines": {
+    "vscode": "^1.70.0"
+  },
+  "categories": [
+    "Extension Packs",
+    "Themes"
+  ],
+  "extensionPack": [
+    "JetBrains.jetbrains-darcula-theme",
+    "PKief.material-icon-theme"
+  ],
+  "contributes": {
+    "configurationDefaults": {
+      "editor.fontFamily": "'JetBrains Mono', Consolas, monospace",
+      "editor.fontLigatures": true,
+      "editor.fontSize": 14,
+      "editor.lineHeight": 22,
+      "editor.minimap.enabled": false,
+      "editor.lineNumbers": "on",
+      "breadcrumbs.enabled": true,
+      "workbench.statusBar.visible": true,
+      "workbench.editor.tabCloseButton": "right",
+      "workbench.iconTheme": "material-icon-theme",
+      "workbench.colorTheme": "JetBrains Darcula"
+    }
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/igorhaf/jetvibe.git"
+  }
+}
