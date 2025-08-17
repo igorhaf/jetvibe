@@ -2,20 +2,47 @@
   "name": "jetvibe",
   "displayName": "JetVibe",
   "description": "Sets up VSCode in the PhpStorm style and includes ready-to-use extras.",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "publisher": "igorhaf",
   "engines": { "vscode": "^1.84.0" },
+  "extensionKind": ["ui"],
   "categories": ["Themes", "Keymaps", "Extension Packs"],
   "keywords": ["phpstorm", "darcula", "jetbrains", "keymap", "theme", "icons"],
+
   "extensionPack": [
-    "PKief.material-icon-theme"
+    "PKief.material-icon-theme",
+    "bmewburn.vscode-intelephense-client",
+    "xdebug.php-debug",
+    "amiralizadeh9480.laravel-extra-intellisense",
+    "shufo.vscode-blade-formatter",
+    "onecentlin.laravel-blade",
+    "ryannaddy.laravel-artisan",
+    "recca0120.vscode-phpunit",
+    "bradlc.vscode-tailwindcss",
+    "mikestead.dotenv",
+    "eamodio.gitlens"
   ],
+  "extensionDependencies": [
+    "PKief.material-icon-theme",
+    "bmewburn.vscode-intelephense-client",
+    "xdebug.php-debug",
+    "amiralizadeh9480.laravel-extra-intellisense",
+    "shufo.vscode-blade-formatter",
+    "onecentlin.laravel-blade",
+    "ryannaddy.laravel-artisan",
+    "recca0120.vscode-phpunit",
+    "bradlc.vscode-tailwindcss",
+    "mikestead.dotenv",
+    "eamodio.gitlens"
+  ],
+
   "contributes": {
     "commands": [
       { "command": "jetvibe.installFont", "title": "JetVibe: Install JetBrains Mono" },
       { "command": "jetvibe.installNerdFont", "title": "JetVibe: Install JetBrainsMono Nerd Font" },
       { "command": "jetvibe.useNerdFontInTerminal", "title": "JetVibe: Use Nerd Font in Terminal" },
-      { "command": "jetvibe.setupP10kWSL", "title": "JetVibe: Setup Powerlevel10k on WSL" }
+      { "command": "jetvibe.setupP10kWSL", "title": "JetVibe: Setup Powerlevel10k on WSL" },
+      { "command": "jetvibe.applyLaravelPreset", "title": "JetVibe: Aplicar preset Laravel" }
     ],
     "themes": [
       {
@@ -25,37 +52,46 @@
       }
     ],
     "configurationDefaults": {
+      "files.associations": { "*.blade.php": "blade" },
+      "[blade]": {
+        "editor.defaultFormatter": "shufo.vscode-blade-formatter",
+        "editor.formatOnSave": true
+      },
+      "editor.formatOnSave": true,
+
+      "window.titleBarStyle": "custom",
+      "window.zoomLevel": -1.25,
+
+      "workbench.tree.indent": 8,
+      "workbench.editor.tabSizing": "shrink",
+      "workbench.iconTheme": "material-icon-theme",
+      "workbench.colorTheme": "JetVibe Darcula",
+
       "editor.fontFamily": "'JetBrains Mono', Consolas, monospace",
       "editor.fontWeight": "400",
       "editor.fontLigatures": true,
-
-      "editor.fontSize": 13,
+      "editor.fontSize": 12,
       "editor.lineHeight": 20,
       "editor.letterSpacing": -0.1,
-      "window.zoomLevel": -0.5,
+
       "terminal.integrated.fontFamily": "JetBrainsMono Nerd Font Mono",
       "terminal.integrated.fontSize": 13,
       "terminal.integrated.lineHeight": 1.1,
       "terminal.integrated.letterSpacing": 0,
 
-      "workbench.tree.indent": 12,
       "workbench.list.smoothScrolling": true,
-      "workbench.editor.tabSizing": "shrink",
       "editor.minimap.enabled": false,
       "breadcrumbs.enabled": true,
       "editor.bracketPairColorization.enabled": false,
-
       "editor.lineNumbers": "on",
-      "workbench.statusBar.visible": true,
-      "workbench.iconTheme": "material-icon-theme",
-      "workbench.colorTheme": "JetVibe Darcula"
+      "workbench.statusBar.visible": true
     },
     "keybindings": [
       { "command": "workbench.action.showCommands", "key": "ctrl+shift+a", "when": "editorTextFocus" },
       { "command": "editor.action.formatDocument", "key": "ctrl+alt+l", "when": "editorHasDocumentFormattingProvider && editorTextFocus && !editorReadonly" },
       { "command": "editor.action.organizeImports", "key": "ctrl+alt+o", "when": "editorHasOrganizeImportsProvider && editorTextFocus && !editorReadonly" },
       { "command": "editor.action.rename", "key": "shift+f6", "when": "editorHasRenameProvider && editorTextFocus && !editorReadonly" },
-      { "command": "workbench.action.findInFiles", "key": "ctrl+shift+f" },
+      { "command": "workbench.action.findInFiles", "key": "ctrl+shift*f" },
       { "command": "workbench.action.replaceInFiles", "key": "ctrl+shift+r" },
       { "command": "editor.action.commentLine", "key": "ctrl+/", "when": "editorTextFocus && !editorReadonly" },
       { "command": "editor.action.blockComment", "key": "ctrl+shift+/", "when": "editorTextFocus && !editorReadonly" },
@@ -83,6 +119,15 @@
       { "command": "workbench.action.debug.start", "key": "shift+f9" }
     ]
   },
+
+  "activationEvents": [
+    "onCommand:jetvibe.installFont",
+    "onCommand:jetvibe.installNerdFont",
+    "onCommand:jetvibe.useNerdFontInTerminal",
+    "onCommand:jetvibe.setupP10kWSL",
+    "onCommand:jetvibe.applyLaravelPreset"
+  ],
+
   "license": "MIT",
   "repository": { "type": "git", "url": "https://github.com/igorhaf/jetvibe.git" },
   "homepage": "https://github.com/igorhaf/jetvibe#readme",
