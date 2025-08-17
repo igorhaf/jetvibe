@@ -2,7 +2,7 @@
   "name": "jetvibe",
   "displayName": "JetVibe",
   "description": "Sets up VSCode in the PhpStorm style and includes ready-to-use extras.",
-  "version": "0.0.5",
+  "version": "0.0.7",
   "publisher": "igorhaf",
   "engines": { "vscode": "^1.84.0" },
   "categories": ["Themes", "Keymaps", "Extension Packs"],
@@ -11,6 +11,9 @@
     "PKief.material-icon-theme"
   ],
   "contributes": {
+    "commands": [
+      { "command": "jetvibe.installFont", "title": "JetVibe: Install JetBrains Mono" }
+    ],
     "themes": [
       {
         "label": "JetVibe Darcula",
@@ -21,7 +24,7 @@
     "configurationDefaults": {
       "editor.fontFamily": "Jetbrains Mono, Monaco, 'Courier New', monospace",
       "editor.fontSize": 13,
-      "editor.lineHeight": 1.4,
+      "editor.lineHeight": 20,
       "editor.fontWeight": "400",
       "editor.letterSpacing": 0.2,
       "terminal.integrated.fontFamily": "JetBrains Mono",
@@ -77,5 +80,6 @@
   "license": "MIT",
   "repository": { "type": "git", "url": "https://github.com/igorhaf/jetvibe.git" },
   "homepage": "https://github.com/igorhaf/jetvibe#readme",
-  "bugs": { "url": "https://github.com/igorhaf/jetvibe/issues" }
+  "bugs": { "url": "https://github.com/igorhaf/jetvibe/issues" },
+  "main": "./extension.js"
 }
