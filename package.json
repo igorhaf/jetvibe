@@ -42,7 +42,11 @@
       },
       {
         "command": "jetvibe.applyLaravelPreset",
-        "title": "JetVibe: Aplicar preset Laravel"
+        "title": "JetVibe: Aplicar preset Laravel (Local)"
+      },
+      {
+        "command": "jetvibe.applySailPreset",
+        "title": "JetVibe: Aplicar preset Laravel (Sail)"
       }
     ],
     "themes": [
