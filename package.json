@@ -2,7 +2,7 @@
   "name": "jetvibe",
   "displayName": "JetVibe",
   "description": "Sets up VSCode in the PhpStorm style and includes ready-to-use extras.",
-  "version": "0.0.12-core",
+  "version": "0.0.22",
   "publisher": "igorhaf",
   "engines": {
     "vscode": "^1.84.0"
@@ -53,6 +53,13 @@
       }
     ],
     "configurationDefaults": {
+      "php.intelephense.files.maxMemory": 4096,
+      "php.intelephense.environment.includePaths": [
+        "vendor"
+      ],
+      "php.intelephense.diagnostics.enable": true,
+      "php.intelephense.trace.server": "off",
+      "php.validate.enable": false,
       "files.associations": {
         "*.blade.php": "blade"
       },
@@ -250,5 +257,35 @@
   "bugs": {
     "url": "https://github.com/igorhaf/jetvibe/issues"
   },
+  "extensionPack": [
+    "PKief.material-icon-theme",
+    "bmewburn.vscode-intelephense-client",
+    "xdebug.php-debug",
+    "amiralizadeh9480.laravel-extra-intellisense",
+    "shufo.vscode-blade-formatter",
+    "onecentlin.laravel-blade",
+    "ryannaddy.laravel-artisan",
+    "recca0120.vscode-phpunit",
+    "bradlc.vscode-tailwindcss",
+    "mikestead.dotenv",
+    "eamodio.gitlens",
+    "cweijan.vscode-database-client2",
+    "Vue.volar"
+  ],
+  "extensionDependencies": [
+    "PKief.material-icon-theme",
+    "bmewburn.vscode-intelephense-client",
+    "xdebug.php-debug",
+    "amiralizadeh9480.laravel-extra-intellisense",
+    "shufo.vscode-blade-formatter",
+    "onecentlin.laravel-blade",
+    "ryannaddy.laravel-artisan",
+    "recca0120.vscode-phpunit",
+    "bradlc.vscode-tailwindcss",
+    "mikestead.dotenv",
+    "eamodio.gitlens",
+    "cweijan.vscode-database-client2",
+    "Vue.volar"
+  ],
   "main": "./extension.js"
 }

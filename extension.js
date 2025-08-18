@@ -122,11 +122,14 @@ async function applyLaravelPreset() {
     ['files.associations', { '*.blade.php': 'blade' }],
     ['editor.formatOnSave', true],
     ['[blade]', { 'editor.defaultFormatter': 'shufo.vscode-blade-formatter', 'editor.formatOnSave': true }],
-    ['php.validate.executablePath', './vendor/bin/php sail php'],
+    ['emmet.includeLanguages', { 'blade': 'html' }],
+    ['blade.format.enable', true],
+    ['editor.semanticHighlighting.enabled', false],
     ['intelephense.environment.phpVersion', '8.2'],
     ['intelephense.format.enable', false]
-  ]);
-  vscode.window.showInformationMessage('Preset Laravel aplicado. Ajuste o caminho do PHP se necessário.');
+    ['php.validate.enable', false],
+  ], vscode.ConfigurationTarget.Workspace);
+  vscode.window.showInformationMessage('Preset Laravel aplicado. Blade associado e colorização ajustada.');
 }
 
 /* --------- Preset Laravel (Sail) --------- */
@@ -149,8 +152,8 @@ async function applySailPreset() {
 
   const pairs = [
     ['php.validate.enable', false],
-    ['laravelExtraIntellisense.phpCommand', './vendor/bin/sail php'],
-    ['laravelExtraIntellisense.artisanCommand', './vendor/bin/sail artisan'],
+    ['laravelExtraIntellisense.phpPath', './vendor/bin/sail'],
+    ['laravelExtraIntellisense.artisanPath', 'artisan'],
     ['intelephense.environment.phpVersion', '8.2']
   ];
 
