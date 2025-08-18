@@ -1,10 +1,11 @@
-// extension.js — JetVibe (final)
+// extension.js — JetVibe (final + Sail)
 const vscode = require('vscode');
 const fs = require('fs');
 const path = require('path');
 const cp = require('child_process');
 
 const isWindows = process.platform === 'win32';
+const isMac = process.platform === 'darwin';
 
 function exists(p) { try { fs.accessSync(p); return true; } catch { return false; } }
 
@@ -115,7 +116,7 @@ echo "OK"
   }
 }
 
-/* --------- Preset Laravel --------- */
+/* --------- Preset Laravel (Local) --------- */
 async function applyLaravelPreset() {
   await setConfig([
     ['files.associations', { '*.blade.php': 'blade' }],
@@ -128,14 +129,93 @@ async function applyLaravelPreset() {
   vscode.window.showInformationMessage('Preset Laravel aplicado. Ajuste o caminho do PHP se necessário.');
 }
 
+/* --------- Preset Laravel (Sail) --------- */
+function wsRoot() {
+  const ws = vscode.workspace.workspaceFolders?.[0];
+  return ws ? ws.uri.fsPath : null;
+}
+function writeJsonIfAbsent(filePath, contentObj) {
+  if (!exists(path.dirname(filePath))) fs.mkdirSync(path.dirname(filePath), { recursive: true });
+  if (!exists(filePath)) fs.writeFileSync(filePath, JSON.stringify(contentObj, null, 2));
+}
+
+async function applySailPreset() {
+  const root = wsRoot();
+  if (!root) { vscode.window.showErrorMessage('Abra a raiz do projeto Laravel para aplicar o preset Sail.'); return; }
+
+  if (!exists(path.join(root, 'vendor', 'bin', 'sail'))) {
+    vscode.window.showWarningMessage('vendor/bin/sail não encontrado. Rode: composer require laravel/sail --dev && php artisan sail:install');
+  }
+
+  const pairs = [
+    ['php.validate.enable', false],
+    ['laravelExtraIntellisense.phpCommand', './vendor/bin/sail php'],
+    ['laravelExtraIntellisense.artisanCommand', './vendor/bin/sail artisan'],
+    ['intelephense.environment.phpVersion', '8.2']
+  ];
+
+  // perfis de terminal por SO (opcional, mas ajuda)
+  if (isWindows) {
+    pairs.push(
+      ['terminal.integrated.profiles.windows', {
+        'Sail (app)': { path: 'powershell.exe', args: ['-NoLogo', '-NoExit', '-Command', './vendor/bin/sail shell'], overrideName: true }
+      }],
+      ['terminal.integrated.defaultProfile.windows', 'Sail (app)']
+    );
+  } else if (isMac) {
+    pairs.push(
+      ['terminal.integrated.profiles.osx', {
+        'Sail (app)': { path: '/bin/zsh', args: ['-lc', './vendor/bin/sail shell'], overrideName: true }
+      }],
+      ['terminal.integrated.defaultProfile.osx', 'Sail (app)']
+    );
+  } else {
+    pairs.push(
+      ['terminal.integrated.profiles.linux', {
+        'Sail (app)': { path: '/bin/bash', args: ['-lc', './vendor/bin/sail shell'], overrideName: true }
+      }],
+      ['terminal.integrated.defaultProfile.linux', 'Sail (app)']
+    );
+  }
+
+  // grava no WORKSPACE pra não sujar global
+  await setConfig(pairs, vscode.ConfigurationTarget.Workspace);
+
+  // cria launch/tasks se não existir
+  const vscodeDir = path.join(root, '.vscode');
+  writeJsonIfAbsent(path.join(vscodeDir, 'launch.json'), {
+    version: '0.2.0',
+    configurations: [
+      {
+        name: 'Listen for Xdebug (Sail)',
+        type: 'php',
+        request: 'launch',
+        port: 9003,
+        hostname: 'localhost',
+        pathMappings: { '/var/www/html': '${workspaceFolder}' }
+      }
+    ]
+  });
+
+  writeJsonIfAbsent(path.join(vscodeDir, 'tasks.json'), {
+    version: '2.0.0',
+    tasks: [
+      { label: 'Sail: test', type: 'shell', command: './vendor/bin/sail test', problemMatcher: [] }
+    ]
+  });
+
+  vscode.window.showInformationMessage('Preset Sail aplicado. Suba o Docker com: ./vendor/bin/sail up -d');
+}
+
 /* --------- activate --------- */
 function activate(ctx) {
   ctx.subscriptions.push(
     vscode.commands.registerCommand('jetvibe.installFont', () => installJetBrainsMono(ctx)),
     vscode.commands.registerCommand('jetvibe.installNerdFont', () => installNerdFont(ctx)),
-    vscode.commands.registerCommand('jetvibe.useNerdFontInTerminal', useNerdFontInTerminal),
-    vscode.commands.registerCommand('jetvibe.setupP10kWSL', setupP10kWSL),
-    vscode.commands.registerCommand('jetvibe.applyLaravelPreset', applyLaravelPreset)
+    vscode.commands.registerCommand('jetvibe.useNerdFontInTerminal', () => useNerdFontInTerminal()),
+    vscode.commands.registerCommand('jetvibe.setupP10kWSL', () => setupP10kWSL()),
+    vscode.commands.registerCommand('jetvibe.applyLaravelPreset', () => applyLaravelPreset()),
+    vscode.commands.registerCommand('jetvibe.applySailPreset', () => applySailPreset())
   );
 }
 
