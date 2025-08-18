@@ -2,7 +2,7 @@
   "name": "jetvibe",
   "displayName": "JetVibe",
   "description": "Sets up VSCode in the PhpStorm style and includes ready-to-use extras.",
-  "version": "0.0.14",
+  "version": "0.0.12-core",
   "publisher": "igorhaf",
   "engines": {
     "vscode": "^1.84.0"
@@ -42,11 +42,7 @@
       },
       {
         "command": "jetvibe.applyLaravelPreset",
-        "title": "JetVibe: Aplicar preset Laravel (Local)"
-      },
-      {
-        "command": "jetvibe.applySailPreset",
-        "title": "JetVibe: Aplicar preset Laravel (Sail)"
+        "title": "JetVibe: Aplicar preset Laravel"
       }
     ],
     "themes": [
