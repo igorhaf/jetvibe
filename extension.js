@@ -114,7 +114,7 @@ async function applyLaravelPreset() {
     ['files.associations', { '*.blade.php': 'blade' }],
     ['editor.formatOnSave', true],
     ['[blade]', { 'editor.defaultFormatter': 'shufo.vscode-blade-formatter', 'editor.formatOnSave': true }],
-    ['php.validate.executablePath', '/usr/bin/php'],
+    ['php.validate.executablePath', './vendor/bin/php sail php'],
     ['intelephense.environment.phpVersion', '8.2'],
     ['intelephense.format.enable', false]
   ]);
@@ -132,5 +132,5 @@ function activate(ctx) {
   );
 }
 
-function deactivate() {}
+function deactivate() { }
 module.exports = { activate, deactivate };
