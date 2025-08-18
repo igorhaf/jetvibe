@@ -1,8 +1,10 @@
-// extension.js — JetVibe
+// extension.js — JetVibe (final)
 const vscode = require('vscode');
 const fs = require('fs');
 const path = require('path');
 const cp = require('child_process');
+
+const isWindows = process.platform === 'win32';
 
 function exists(p) { try { fs.accessSync(p); return true; } catch { return false; } }
 
@@ -70,6 +72,11 @@ function runWSL(script) {
 }
 
 async function setupP10kWSL() {
+  if (!isWindows) {
+    vscode.window.showWarningMessage('Setup P10k (WSL) só é suportado no Windows. Pule esse passo neste SO.');
+    return;
+  }
+
   const installScript = `
 set -e
 export DEBIAN_FRONTEND=noninteractive
@@ -132,5 +139,5 @@ function activate(ctx) {
   );
 }
 
-function deactivate() {}
+function deactivate() { }
 module.exports = { activate, deactivate };
