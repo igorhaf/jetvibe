@@ -2,7 +2,7 @@
   "name": "jetvibe",
   "displayName": "JetVibe",
   "description": "Sets up VSCode to Jetbrains style and includes ready-to-use extras.",
-  "version": "0.0.23",
+  "version": "0.0.24",
   "publisher": "igorhaf",
   "engines": {
     "vscode": "^1.84.0"
@@ -10,7 +10,7 @@
   "extensionKind": [
     "ui"
   ],
-  "icon": "icon-jetvibe.png",
+  "icon": "images/icon.png",
   "categories": [
     "Themes",
     "Keymaps"
@@ -226,6 +226,7 @@
   "files": [
     "themes/**",
     "fonts/**",
+    "images/**",
     "extension.js",
     "README.md",
     "LICENSE*"
