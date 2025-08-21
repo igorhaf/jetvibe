@@ -2,7 +2,7 @@
   "name": "jetvibe",
   "displayName": "JetVibe",
   "description": "Sets up VSCode to Jetbrains style and includes ready-to-use extras.",
-  "version": "0.0.28",
+  "version": "0.0.30",
   "publisher": "igorhaf",
   "engines": {
     "vscode": "^1.84.0"
@@ -44,6 +44,14 @@
       {
         "command": "jetvibe.openLocalHistory",
         "title": "JetVibe: Open Local History"
+      },
+      {
+        "command": "jetvibe.showLocalHistoryStats",
+        "title": "JetVibe: Show Local History Stats"
+      },
+      {
+        "command": "jetvibe.cleanupLocalHistory",
+        "title": "JetVibe: Cleanup Local History"
       }
     ],
     "themes": [
@@ -241,20 +249,11 @@
   },
   "extensionPack": [
     "PKief.material-icon-theme",
-    "PKief.material-icon-theme",
-    "bradlc.vscode-tailwindcss",
     "mikestead.dotenv",
     "eamodio.gitlens",
     "cweijan.vscode-database-client2",
     "Vue.volar"
   ],
-  "extensionDependencies": [
-    "PKief.material-icon-theme",
-    "bradlc.vscode-tailwindcss",
-    "mikestead.dotenv",
-    "eamodio.gitlens",
-    "cweijan.vscode-database-client2",
-    "Vue.volar"
-  ],
+  "extensionDependencies": [],
   "main": "./extension.js"
 }
