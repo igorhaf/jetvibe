@@ -40,6 +40,10 @@
       {
         "command": "jetvibe.setupP10kWSL",
         "title": "JetVibe: Setup Powerlevel10k on WSL"
+      },
+      {
+        "command": "jetvibe.openLocalHistory",
+        "title": "JetVibe: Open Local History"
       }
     ],
     "themes": [
@@ -217,17 +221,12 @@
       }
     ]
   },
-  "activationEvents": [
-    "onCommand:jetvibe.installFont",
-    "onCommand:jetvibe.installNerdFont",
-    "onCommand:jetvibe.useNerdFontInTerminal",
-    "onCommand:jetvibe.setupP10kWSL"
-  ],
   "files": [
     "themes/**",
     "fonts/**",
     "images/**",
     "extension.js",
+    "localHistory.js",
     "README.md",
     "LICENSE*"
   ],

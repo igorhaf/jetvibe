@@ -4,6 +4,9 @@ const fs = require('fs');
 const path = require('path');
 const cp = require('child_process');
 
+// Importa a feature de Histórico Local de forma modular
+const localHistory = require('./localHistory');
+
 const isWindows = process.platform === 'win32';
 const isMac = process.platform === 'darwin';
 
@@ -118,12 +121,17 @@ echo "OK"
 
 /* --------- activate --------- */
 function activate(ctx) {
+  // Registra os comandos das features existentes (fontes e P10k)
   ctx.subscriptions.push(
     vscode.commands.registerCommand('jetvibe.installFont', () => installJetBrainsMono(ctx)),
     vscode.commands.registerCommand('jetvibe.installNerdFont', () => installNerdFont(ctx)),
     vscode.commands.registerCommand('jetvibe.useNerdFontInTerminal', () => useNerdFontInTerminal()),
     vscode.commands.registerCommand('jetvibe.setupP10kWSL', () => setupP10kWSL()),
   );
+
+  // Registra a nova feature de Histórico Local de forma modular
+  // Esta chamada irá registrar todos os comandos relacionados ao histórico local
+  localHistory.register(ctx);
 }
 function deactivate() { }
 module.exports = { activate, deactivate };
