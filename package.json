@@ -2,7 +2,7 @@
   "name": "jetvibe",
   "displayName": "JetVibe",
   "description": "Sets up VSCode to Jetbrains style and includes ready-to-use extras.",
-  "version": "0.0.25",
+  "version": "0.0.28",
   "publisher": "igorhaf",
   "engines": {
     "vscode": "^1.84.0"
