@@ -1,83 +1,128 @@
-# JetVibe  
+# JetVibe
 
-**JetVibe** is a Visual Studio Code extension pack and configuration preset that transforms your editor into a JetBrains-like IDE experience.  
-It ships with a dark *Darcula*-style theme, fonts, keymaps, and curated extensions for a modern full-stack workflow.  
+**JetVibe** is a VS Code **extension pack** + **configuration preset** that gives your editor a **JetBrains-like** experience: **Darcula** theme, JetBrains fonts, smart keymap, polished UI, and a **curated set of extensions** for a modern full-stack workflow (Laravel/PHP, React, Vue, Angular, DevOps/K8s, etc.)—with a focus on **syntax highlighting + lightweight IntelliSense**.
 
----
+## ✨ Highlights
 
-## ✨ Features
+- 🎨 **Darcula Theme** (JetVibe)  
+- 🔤 **JetBrains Mono & Nerd Font** (with installer commands)  
+- 🗂️ **Material Icon Theme**  
+- ⚡ **JetBrains-style keymap** (navigation/editing boosts)  
+- 🖥️ **UI tweaks** (custom title bar, zoom, tabs, ligatures, minimap off, etc.)  
+- 🐚 **Powerlevel10k on WSL** (auto setup for Windows)  
+- 🧠 **Lightweight philosophy**: grammars + essential LS only → fast, clean editor
 
-- 🎨 **Darcula Theme** – inspired by JetBrains IDEs.  
-- 🔤 **JetBrains Mono & Nerd Fonts** – bundled with installer commands.  
-- 🗂️ **Material Icon Theme** – clean, recognizable file icons.  
-- ⚡ **Keymap Tweaks** – common JetBrains shortcuts mapped in VSCode.  
-- 🖥️ **UI Tweaks** – title bar, zoom, tab sizing, smooth scrolling, font ligatures, and more.  
-- 🐚 **Powerlevel10k on WSL** – automated setup script for Windows users.  
-- 🛠️ **Extension Pack Included**  
-  - Tailwind CSS IntelliSense  
-  - Vue Volar (Vue 3 tooling)  
-  - Dotenv support  
-  - GitLens  
-  - Database Client  
-  - Material Icon Theme  
+## 🧩 Curated Extension Pack
 
----
+**Web / Front-end**
+- **React / Next** (built-in JS/TS + JSX/TSX), **Tailwind CSS IntelliSense**, **CSS-in-JS** (*styled-components*), **CSS Modules**
+- **Vue 3** (**Volar**)
+- **Angular** (**Angular Language Service**) – auto-activates only in Angular workspaces
+- **Svelte**, **Astro** (syntax + lean IntelliSense)
+- **PostCSS**
 
-## 📦 Installation
+**Back-end / Templates**
+- **PHP** (**Intelephense**) + **Blade**
+- **EJS**, **Jinja**, **Twig**
 
-1. Download and install from the [Visual Studio Marketplace](https://marketplace.visualstudio.com/).  
-2. Reload VSCode after installation.  
-3. (Optional) Run the bundled commands for fonts and terminal setup:
+**APIs / Data**
+- **GraphQL** (syntax + tooling)
+- **Prisma** (schema)
+- **OpenAPI/Swagger**
+- **Protocol Buffers (.proto)**
 
-- `JetVibe: Install JetBrains Mono`  
-- `JetVibe: Install JetBrainsMono Nerd Font`  
-- `JetVibe: Use Nerd Font in Terminal`  
-- `JetVibe: Setup Powerlevel10k on WSL` (Windows only)
+**Databases / Utilities**
+- **Database Client** (MySQL/PostgreSQL/SQLite/…)
+- **DotENV** (.env files)
 
----
+**Infra / DevOps**
+- **Docker**
+- **YAML** (incl. K8s ecosystem)
+- **Kubernetes Tools**
+- **Helm Intellisense**
+- **Terraform (HCL)**
+- **NGINX**
+- **TOML**, **INI**
+- **CSV/TSV** (preview/highlight)
 
-## ⌨️ Keybindings
+**Extra Languages**
+- **Python** (+ Pylance), **Go**, **Rust**
+- **Markdown + Mermaid**, **PlantUML**
+- **Nix** (IDE)
 
-JetVibe remaps a selection of **JetBrains-style shortcuts**, including:
+> The full list (with IDs) lives under `extensionPack` in `package.json`.
 
-- `Ctrl+Shift+A` → Command Palette  
-- `Ctrl+Alt+L` → Format Document  
-- `Alt+Enter` → Quick Fix  
-- `Shift+F6` → Rename Symbol  
-- `Ctrl+B` → Go to Definition  
-- …and many more (see full list in `package.json`).
+## 🛠️ JetVibe Commands
 
----
+**Fonts & Terminal**
+- `JetVibe: Install JetBrains Mono`
+- `JetVibe: Install JetBrainsMono Nerd Font`
+- `JetVibe: Use Nerd Font in Terminal`
+- `JetVibe: Setup Powerlevel10k on WSL` *(Windows)*
+
+**Local History (built-in)**
+- `JetVibe: Open Local History` *(sidebar: “JetVibe · Local History”)*
+- `JetVibe: Show Local History Stats`
+- `JetVibe: Cleanup Local History`
+- `JetVibe: Diff With Latest Snapshot`
+- `JetVibe: Diff Snapshot With Previous`
+- `JetVibe: Diff Folder With Local Directory`
+- `JetVibe: Switch To Diff With Next Revision`
+
+**PHP (opt-in)**
+- `JetVibe: Enable PHP Stubs Extras` → merges common stubs (WordPress, Blackfire, Redis, Imagick, Swoole) **on demand**, keeping defaults lean.
+
+> **Performance**: commands use **`activationEvents: onCommand`**, so JetVibe only activates when you actually use it.
+
+## ⌨️ Keybindings (JetBrains-like)
+
+- **Ctrl+Shift+A** → Command Palette  
+- **Ctrl+Alt+L** → Format Document  
+- **Alt+Enter** → Quick Fix  
+- **Shift+F6** → Rename Symbol  
+- **Ctrl+B** → Go to Definition  
+- …and more (see `package.json` → `contributes.keybindings`).
 
 ## ⚙️ Default Settings
 
-Some opinionated defaults are applied automatically:
+- **Format on Save** enabled  
+- **JetVibe Darcula** theme  
+- **JetBrains Mono** (+ ligatures)  
+- **Minimap off** | **Bracket pair colorization off**  
+- **Status bar on**  
+- **Terminal** pre-set to **Nerd Font**  
+- **PHP**: built-in validation off (use Intelephense)  
+- **TypeScript**: use **workspace TS** (`node_modules/typescript/lib`)  
+- **Tailwind**: suggestions in common template langs (Blade, Vue, etc.)  
+- **Quick suggestions in strings** enabled  
+- **Markdown + Mermaid** enabled (diagrams in MD)
 
-- Format on Save enabled  
-- Darcula theme applied  
-- JetBrains Mono font + ligatures  
-- Minimap disabled  
-- Bracket pair colorization off (cleaner look)  
-- Status bar visible  
-- Terminal preconfigured with Nerd Font  
+## 📦 Installation
 
----
+1. Install from the **Visual Studio Marketplace**.  
+2. **Reload** VS Code.  
+3. (Optional) Run font/terminal/WSL commands.  
+4. (Optional) For PHP projects that need extra stubs, run  
+   **`JetVibe: Enable PHP Stubs Extras`**.
 
-## 🚀 Roadmap
+## 🧭 Tips
 
-- More theme variants (light, high-contrast).  
-- Optional presets for different stacks.  
-- Community-driven keybinding refinements.  
+- **Vue**: use **Volar** (don’t mix with Vetur).  
+- **Angular**: LS kicks in only when `angular.json` / `angularCompilerOptions` are present.  
+- **PHP**: keep `intelephense.stubs` **unset** by default; enable extras via command when needed (faster, safer across updates).  
+- **TS/React/Next**: the project’s TypeScript version rules—fewer mismatches between build and editor.
 
----
+## 🗺️ Roadmap
+
+- Theme variants (light, high-contrast)  
+- Optional stack presets (Laravel-only, React-only, DevOps-only)  
+- Community-driven keybinding refinements
 
 ## 🤝 Contributing
 
-Contributions are welcome!  
-Feel free to [open an issue](https://github.com/igorhaf/jetvibe/issues) or submit a PR with improvements.  
-
----
+PRs and issues are welcome!  
+Open a ticket if you want another language/grammar added to the pack.
 
 ## 📜 License
 
-[MIT License](LICENSE)  
+MIT License.

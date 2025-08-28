@@ -2,7 +2,7 @@
   "name": "jetvibe",
   "displayName": "JetVibe",
   "description": "Sets up VSCode to Jetbrains style and includes ready-to-use extras.",
-  "version": "0.0.30",
+  "version": "0.0.42",
   "publisher": "igorhaf",
   "engines": {
     "vscode": "^1.84.0"
@@ -13,7 +13,8 @@
   "icon": "images/icon.png",
   "categories": [
     "Themes",
-    "Keymaps"
+    "Keymaps",
+    "Programming Languages"
   ],
   "keywords": [
     "phpstorm",
@@ -52,6 +53,22 @@
       {
         "command": "jetvibe.cleanupLocalHistory",
         "title": "JetVibe: Cleanup Local History"
+      },
+      {
+        "command": "jetvibe.diffWithLatestSnapshot",
+        "title": "JetVibe: Diff With Latest Snapshot"
+      },
+      {
+        "command": "jetvibe.openSnapshotDiff",
+        "title": "JetVibe: Diff Snapshot With Previous"
+      },
+      {
+        "command": "jetvibe.diffFolderWithLocal",
+        "title": "JetVibe: Diff Folder With Local Directory"
+      },
+      {
+        "command": "jetvibe.switchToNextRevision",
+        "title": "JetVibe: Switch To Diff With Next Revision"
       }
     ],
     "themes": [
@@ -61,6 +78,14 @@
         "path": "./themes/jetvibe-darcula.json"
       }
     ],
+    "views": {
+      "explorer": [
+        {
+          "id": "jetvibeLocalHistory",
+          "name": "JetVibe · Local History"
+        }
+      ]
+    },
     "configurationDefaults": {
       "editor.formatOnSave": true,
       "window.titleBarStyle": "custom",
@@ -83,151 +108,92 @@
       "breadcrumbs.enabled": true,
       "editor.bracketPairColorization.enabled": false,
       "editor.lineNumbers": "on",
-      "workbench.statusBar.visible": true
+      "workbench.statusBar.visible": true,
+      "php.validate.enable": false,
+      "intelephense.environment.phpVersion": "8.2",
+      "intelephense.files.associations": [
+        "*.php",
+        "*.phtml"
+      ],
+      "files.associations": {
+        "*.blade.php": "blade",
+        "*.jsx": "javascriptreact",
+        "*.tsx": "typescriptreact",
+        "*.ejs": "ejs",
+        "*.hbs": "handlebars",
+        "*.graphql": "graphql",
+        "*.gql": "graphql",
+        "*.proto": "proto3",
+        "*.prisma": "prisma",
+        "*.tf": "terraform",
+        "*.tfvars": "terraform",
+        "*.cue": "cue",
+        "*.jsonnet": "jsonnet",
+        "*.libsonnet": "jsonnet",
+        "*.jinja": "jinja-html",
+        "*.j2": "jinja-html",
+        "*.twig": "twig",
+        "*.toml": "toml",
+        "*.ini": "ini",
+        "*.csv": "csv",
+        "*.tsv": "tsv",
+        "nginx.conf": "nginx"
+      },
+      "tailwindCSS.includeLanguages": {
+        "blade": "html",
+        "vue": "html",
+        "php": "html",
+        "ejs": "html",
+        "jinja-html": "html",
+        "twig": "html",
+        "svelte": "html",
+        "astro": "html"
+      },
+      "typescript.tsdk": "node_modules/typescript/lib",
+      "editor.quickSuggestions": {
+        "strings": true
+      },
+      "markdown.mermaid.enabled": true
     },
-    "keybindings": [
-      {
-        "command": "workbench.action.showCommands",
-        "key": "ctrl+shift+a",
-        "when": "editorTextFocus"
-      },
-      {
-        "command": "editor.action.formatDocument",
-        "key": "ctrl+alt+l",
-        "when": "editorHasDocumentFormattingProvider && editorTextFocus && !editorReadonly"
-      },
-      {
-        "command": "editor.action.organizeImports",
-        "key": "ctrl+alt+o",
-        "when": "editorHasOrganizeImportsProvider && editorTextFocus && !editorReadonly"
-      },
-      {
-        "command": "editor.action.rename",
-        "key": "shift+f6",
-        "when": "editorHasRenameProvider && editorTextFocus && !editorReadonly"
-      },
-      {
-        "command": "workbench.action.findInFiles",
-        "key": "ctrl+shift+f"
-      },
-      {
-        "command": "workbench.action.replaceInFiles",
-        "key": "ctrl+shift+r"
-      },
-      {
-        "command": "editor.action.commentLine",
-        "key": "ctrl+/",
-        "when": "editorTextFocus && !editorReadonly"
-      },
-      {
-        "command": "editor.action.blockComment",
-        "key": "ctrl+shift+/",
-        "when": "editorTextFocus && !editorReadonly"
-      },
-      {
-        "command": "editor.action.copyLinesDownAction",
-        "key": "ctrl+d",
-        "when": "editorTextFocus && !editorReadonly"
-      },
-      {
-        "command": "editor.action.deleteLines",
-        "key": "ctrl+y",
-        "when": "editorTextFocus && !editorReadonly"
-      },
-      {
-        "command": "editor.action.joinLines",
-        "key": "ctrl+shift+j",
-        "when": "editorTextFocus && !editorReadonly"
-      },
-      {
-        "command": "editor.action.moveLinesDownAction",
-        "key": "shift+alt+down",
-        "when": "editorTextFocus && !editorReadonly"
-      },
-      {
-        "command": "editor.action.moveLinesUpAction",
-        "key": "shift+alt+up",
-        "when": "editorTextFocus && !editorReadonly"
-      },
-      {
-        "command": "editor.action.quickFix",
-        "key": "alt+enter",
-        "when": "editorHasCodeActionsProvider && editorTextFocus && !editorReadonly"
-      },
-      {
-        "command": "editor.action.revealDefinition",
-        "key": "ctrl+b",
-        "when": "editorHasDefinitionProvider && editorTextFocus"
-      },
-      {
-        "command": "editor.action.peekDefinition",
-        "key": "ctrl+shift+i",
-        "when": "editorHasDefinitionProvider && editorTextFocus"
-      },
-      {
-        "command": "editor.action.goToImplementation",
-        "key": "ctrl+alt+b",
-        "when": "editorHasImplementationProvider && editorTextFocus"
-      },
-      {
-        "command": "editor.action.goToTypeDefinition",
-        "key": "ctrl+shift+b",
-        "when": "editorHasTypeDefinitionProvider && editorTextFocus"
-      },
-      {
-        "command": "editor.action.referenceSearch.trigger",
-        "key": "alt+f7",
-        "when": "editorHasReferenceProvider && editorTextFocus"
-      },
-      {
-        "command": "workbench.action.quickOpenPreviousRecentlyUsedEditorInGroup",
-        "key": "ctrl+e"
-      },
-      {
-        "command": "workbench.action.quickOpen",
-        "key": "ctrl+shift+n"
-      },
-      {
-        "command": "workbench.action.navigateBack",
-        "key": "ctrl+alt+left"
-      },
-      {
-        "command": "workbench.action.navigateForward",
-        "key": "ctrl+alt+right"
-      },
-      {
-        "command": "workbench.action.terminal.toggleTerminal",
-        "key": "alt+f12"
-      },
-      {
-        "command": "editor.action.addSelectionToNextFindMatch",
-        "key": "alt+j",
-        "when": "editorFocus"
-      },
-      {
-        "command": "editor.action.removeSelectionFromNextFindMatch",
-        "key": "shift+alt+j",
-        "when": "editorFocus && editorHasMultipleSelections"
-      },
-      {
-        "command": "editor.action.smartSelect.grow",
-        "key": "ctrl+w",
-        "when": "editorTextFocus"
-      },
-      {
-        "command": "editor.action.smartSelect.shrink",
-        "key": "ctrl+shift+w",
-        "when": "editorTextFocus"
-      },
-      {
-        "command": "workbench.action.debug.run",
-        "key": "shift+f10"
-      },
-      {
-        "command": "workbench.action.debug.start",
-        "key": "shift+f9"
+    "configuration": {
+      "title": "JetVibe · Local History",
+      "properties": {
+        "jetvibe.localHistory.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Ativa/Desativa o Histórico Local (criação automática de snapshots ao abrir/salvar arquivos)."
+        },
+        "jetvibe.localHistory.maxSnapshotsPerFile": {
+          "type": "number",
+          "default": 50,
+          "minimum": 1,
+          "maximum": 500,
+          "description": "Número máximo de snapshots mantidos por arquivo."
+        },
+        "jetvibe.localHistory.includeGlobs": {
+          "type": "array",
+          "default": [
+            "**/*"
+          ],
+          "items": {
+            "type": "string"
+          },
+          "description": "Padrões (glob) a incluir para criação de snapshots. Use '**/*' para todos."
+        },
+        "jetvibe.localHistory.excludeGlobs": {
+          "type": "array",
+          "default": [
+            "**/.git/**",
+            "**/node_modules/**",
+            "**/*.log"
+          ],
+          "items": {
+            "type": "string"
+          },
+          "description": "Padrões (glob) a excluir da criação de snapshots. Tem precedência sobre include."
+        }
       }
-    ]
+    }
   },
   "files": [
     "themes/**",
@@ -250,9 +216,42 @@
   "extensionPack": [
     "PKief.material-icon-theme",
     "mikestead.dotenv",
-    "eamodio.gitlens",
     "cweijan.vscode-database-client2",
-    "Vue.volar"
+    "Vue.volar",
+    "bmewburn.vscode-intelephense-client",
+    "bradlc.vscode-tailwindcss",
+    "onecentlin.laravel-blade",
+    "redhat.vscode-yaml",
+    "chr4.nginx",
+    "Angular.ng-template",
+    "styled-components.vscode-styled-components",
+    "clinyong.vscode-css-modules",
+    "ms-azuretools.vscode-docker",
+    "redhat.vscode-xml",
+    "GraphQL.vscode-graphql",
+    "GraphQL.vscode-graphql-syntax",
+    "Prisma.prisma",
+    "zxh404.vscode-proto3",
+    "42Crunch.vscode-openapi",
+    "HashiCorp.terraform",
+    "ms-kubernetes-tools.vscode-kubernetes-tools",
+    "Tim-Koehler.helm-intellisense",
+    "tamasfe.even-better-toml",
+    "DavidWang.ini-for-vscode",
+    "mechatroner.rainbow-csv",
+    "jnoortheen.nix-ide",
+    "golang.Go",
+    "rust-lang.rust-analyzer",
+    "ms-python.python",
+    "ms-python.vscode-pylance",
+    "bierner.markdown-mermaid",
+    "jebbs.plantuml",
+    "svelte.svelte-vscode",
+    "astro-build.astro-vscode",
+    "csstools.postcss",
+    "digitalbrainstem.javascript-ejs-support",
+    "samuelcolvin.jinjahtml",
+    "whatwedo.twig"
   ],
   "extensionDependencies": [],
   "main": "./extension.js"

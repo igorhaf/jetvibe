@@ -1,4 +1,4 @@
-// extension.js — JetVibe (final + Sail)
+// extension.js — JetVibe
 const vscode = require('vscode');
 const fs = require('fs');
 const path = require('path');
@@ -119,29 +119,52 @@ echo "OK"
   }
 }
 
+/* --------- Opt-in: habilitar stubs extras do Intelephense --------- */
+async function enablePhpStubsExtras() {
+  const cfg = vscode.workspace.getConfiguration('intelephense');
+  let stubs = cfg.get('stubs');
+
+  // tenta capturar o default do próprio pacote do Intelephense se o usuário não personalizou
+  if (!Array.isArray(stubs) || stubs.length === 0) {
+    try {
+      const ext = vscode.extensions.getExtension('bmewburn.vscode-intelephense-client');
+      const def = ext?.packageJSON?.contributes?.configuration?.properties?.['intelephense.stubs']?.default;
+      stubs = Array.isArray(def) ? def.slice() : [];
+    } catch {
+      stubs = [];
+    }
+  }
+
+  const extras = ['wordpress', 'blackfire', 'redis', 'imagick', 'swoole']; // ajuste conforme público
+  const next = Array.from(new Set([...(stubs || []), ...extras])).sort();
+
+  await cfg.update('stubs', next, vscode.ConfigurationTarget.Global);
+  vscode.window.showInformationMessage(`JetVibe: habilitei stubs extras do PHP → ${extras.join(', ')}`);
+}
+
 /* --------- activate --------- */
 function activate(ctx) {
   console.log('🚀 Ativando extensão JetVibe...');
-  
-  // Registra os comandos das features existentes (fontes e P10k)
+
+  // Comandos principais (fontes e P10k)
   ctx.subscriptions.push(
     vscode.commands.registerCommand('jetvibe.installFont', () => installJetBrainsMono(ctx)),
     vscode.commands.registerCommand('jetvibe.installNerdFont', () => installNerdFont(ctx)),
     vscode.commands.registerCommand('jetvibe.useNerdFontInTerminal', () => useNerdFontInTerminal()),
     vscode.commands.registerCommand('jetvibe.setupP10kWSL', () => setupP10kWSL()),
+    vscode.commands.registerCommand('jetvibe.enablePhpStubsExtras', () => enablePhpStubsExtras()) // ✅ novo comando
   );
 
   console.log('✅ Comandos principais registrados');
 
-  // Registra a nova feature de Histórico Local de forma modular
-  // Esta chamada irá registrar todos os comandos relacionados ao histórico local
+  // Histórico Local
   try {
     localHistory.register(ctx);
   } catch (error) {
     console.error('❌ Erro ao carregar localHistory:', error);
     vscode.window.showErrorMessage(`Erro ao carregar Histórico Local: ${error.message}`);
   }
-  
+
   console.log('🎉 Extensão JetVibe ativada com sucesso');
 }
 function deactivate() { }
