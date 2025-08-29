@@ -2,13 +2,14 @@
   "name": "jetvibe",
   "displayName": "JetVibe",
   "description": "Sets up VSCode to Jetbrains style and includes ready-to-use extras.",
-  "version": "0.0.42",
+  "version": "0.1.2",
   "publisher": "igorhaf",
   "engines": {
     "vscode": "^1.84.0"
   },
   "extensionKind": [
-    "ui"
+    "ui",
+    "workspace"
   ],
   "icon": "images/icon.png",
   "categories": [
@@ -26,6 +27,22 @@
   ],
   "contributes": {
     "commands": [
+      {
+        "command": "jetvibe.enablePhpStubsExtras",
+        "title": "JetVibe: Enable PHP Stubs Extras"
+      },
+      {
+        "command": "jetvibe.git.checkoutBranch",
+        "title": "JetVibe: Git · Checkout Branch"
+      },
+      {
+        "command": "jetvibe.git.refreshBranches",
+        "title": "JetVibe: Git · Refresh Branches"
+      },
+      {
+        "command": "jetvibe.git.openDiff",
+        "title": "JetVibe: Git · Open Diff"
+      },
       {
         "command": "jetvibe.installFont",
         "title": "JetVibe: Install JetBrains Mono"
@@ -79,6 +96,17 @@
       }
     ],
     "views": {
+      "scm": [
+        {
+          "id": "jetvibeGitGraph",
+          "name": "JetVibe · Commit Graph",
+          "type": "webview"
+        },
+        {
+          "id": "jetvibeGitBranches",
+          "name": "JetVibe · Branches"
+        }
+      ],
       "explorer": [
         {
           "id": "jetvibeLocalHistory",
@@ -202,7 +230,12 @@
     "extension.js",
     "localHistory.js",
     "README.md",
-    "LICENSE*"
+    "LICENSE*",
+    "gitApi.js",
+    "repoService.js",
+    "branchesView.js",
+    "graphView.js",
+    "diff.js"
   ],
   "license": "MIT",
   "repository": {
@@ -253,6 +286,6 @@
     "samuelcolvin.jinjahtml",
     "whatwedo.twig"
   ],
-  "extensionDependencies": [],
+  "activationEvents": [],
   "main": "./extension.js"
 }

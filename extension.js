@@ -3,6 +3,10 @@ const vscode = require('vscode');
 const fs = require('fs');
 const path = require('path');
 const cp = require('child_process');
+const { RepoService } = require('./repoService');
+const { registerBranchesView } = require('./branchesView');
+const { registerGraphView } = require('./graphView');
+const { openDiff } = require('./diff');
 
 // Importa a feature de Histórico Local de forma modular
 const localHistory = require('./localHistory');
@@ -143,9 +147,17 @@ async function enablePhpStubsExtras() {
 }
 
 /* --------- activate --------- */
-function activate(ctx) {
+async function activate(ctx) {
   console.log('🚀 Ativando extensão JetVibe...');
-
+  const repos = new RepoService();
+  try {
+    await repos.init();
+  } catch (err) {
+    console.error('[JetVibe][Git] init falhou:', err);
+    vscode.window.showWarningMessage(String(err?.message || err));
+  }
+  registerBranchesView(ctx, repos);
+  registerGraphView(ctx, repos);
   // Comandos principais (fontes e P10k)
   ctx.subscriptions.push(
     vscode.commands.registerCommand('jetvibe.installFont', () => installJetBrainsMono(ctx)),
@@ -154,7 +166,17 @@ function activate(ctx) {
     vscode.commands.registerCommand('jetvibe.setupP10kWSL', () => setupP10kWSL()),
     vscode.commands.registerCommand('jetvibe.enablePhpStubsExtras', () => enablePhpStubsExtras()) // ✅ novo comando
   );
-
+  ctx.subscriptions.push(
+    vscode.commands.registerCommand('jetvibe.git.openDiff', async (uri, shaA, shaB) => {
+      const repo = repos.getFirstRepo();
+      if (!repo) return;
+      if (!uri || !shaA || !shaB) {
+        vscode.window.showWarningMessage('Passe arquivo e 2 SHAs para abrir diff.');
+        return;
+      }
+      await openDiff(repo, uri.fsPath, shaA, shaB);
+    })
+  );
   console.log('✅ Comandos principais registrados');
 
   // Histórico Local
